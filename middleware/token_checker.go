@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,10 +24,9 @@ func ValidateUser() gin.HandlerFunc {
 		token := strings.TrimPrefix(authHeader, "Bearer ")
 
 		var userID int64
-		var tokenExpiry time.Time
-		query := `SELECT id, token_expires_at FROM users WHERE token = $1`
+		query := `SELECT id FROM users WHERE token = $1`
 
-		err := config.Db.QueryRow(query, token).Scan(&userID, &tokenExpiry)
+		err := config.Db.QueryRow(query, token).Scan(&userID)
 		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
 				"error": "Unauthorized: invalid token",
