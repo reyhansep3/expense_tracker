@@ -95,7 +95,6 @@ func (r *ExpenseRepo) GetExpenseByDate(userId int, startDate, endDate time.Time)
 	}
 	for rows.Next() {
 		var e models.Expenses
-		// var tempDate time.Time
 
 		err := rows.Scan(&e.ID, &e.UserId, &e.CategoryId, &e.PaymentMethod, &e.Title, &e.Amount, &e.Description, &e.ExpenseDate, &e.CreateAt, &e.CreateBy, &e.ModifiedAt, &e.ModifiedBy)
 		if err != nil {
@@ -104,7 +103,6 @@ func (r *ExpenseRepo) GetExpenseByDate(userId int, startDate, endDate time.Time)
 			}
 			return nil, fmt.Errorf("failed to get expense by id %w", err)
 		}
-		// e.ExpenseDate = tempDate.Format("2006-01-02")
 		expenses = append(expenses, e)
 	}
 	if err = rows.Err(); err != nil {

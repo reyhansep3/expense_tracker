@@ -185,7 +185,6 @@ func (c *ExpenseController) UpdateExpenseByID(ctx *gin.Context) {
 
 	expenseTime := expense.ExpenseDate.ToTime()
 	expense.ID = int64(id)
-	// expense.ID = utils.GenerateId()
 	expense.ModifiedBy = userID
 	expense.CreateBy = userID
 	expense.ModifiedAt = time.Now()
