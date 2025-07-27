@@ -148,7 +148,7 @@ func (r *TargetRepo) UpdateTarget(id int, target models.Target) (*models.Target,
 		target.ModifiedBy,
 	)
 	if err != nil {
-		return nil, fmt.Errorf("failed to update expense %w", err)
+		return nil, fmt.Errorf("failed to update target %w", err)
 	}
 
 	rowsAffected, err := rows.RowsAffected()
